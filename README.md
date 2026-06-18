@@ -9,7 +9,7 @@ A personal finance tracker built with React — log income and expenses, visuali
 ![Deployed on Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?style=flat&logo=vercel&logoColor=white)
 
 ## 🔗 Live Demo
-**[YOUR-VERCEL-URL](https://YOUR-VERCEL-URL)**
+**[expense-tracker-2511.vercel.app](https://expense-tracker-2511.vercel.app/)**
 
 ---
 
@@ -135,4 +135,4 @@ CRA is deprecated. Vite offers faster dev server startup, instant HMR, and moder
 
 ---
 
-## 📁 Project Structure
+
