@@ -1,4 +1,4 @@
-# 💰 Expense Tracker
+# 💰 Spendly -  Expense Tracker
 
 A personal finance tracker built with React — log income and expenses, visualize spending patterns, and track your balance in real time.
 
