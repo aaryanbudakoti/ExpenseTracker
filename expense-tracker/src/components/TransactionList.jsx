@@ -1,58 +1,75 @@
 function TransactionList({ transactions, onDelete }) {
   const categoryColors = {
-    Food: 'bg-green-900 text-green-400',
-    Transport: 'bg-blue-900 text-blue-400',
-    Shopping: 'bg-pink-900 text-pink-400',
-    Entertainment: 'bg-purple-900 text-purple-400',
-    Health: 'bg-orange-900 text-orange-400',
-    Salary: 'bg-teal-900 text-teal-400',
-    Other: 'bg-slate-700 text-slate-300',
+    Food: { bg: 'rgba(74,222,128,0.1)', color: '#4ade80' },
+    Transport: { bg: 'rgba(96,165,250,0.1)', color: '#60a5fa' },
+    Shopping: { bg: 'rgba(249,168,212,0.1)', color: '#f9a8d4' },
+    Entertainment: { bg: 'rgba(192,132,252,0.1)', color: '#c084fc' },
+    Health: { bg: 'rgba(251,146,60,0.1)', color: '#fb923c' },
+    Salary: { bg: 'rgba(74,222,128,0.1)', color: '#4ade80' },
+    Other: { bg: 'rgba(148,163,184,0.1)', color: '#94a3b8' },
   }
 
   const fmt = (n) => '₹' + n.toLocaleString('en-IN')
 
-  if (transactions.length === 0) {
-    return (
-      <div className="bg-slate-800 border border-slate-700 rounded-2xl p-8 text-center text-slate-500">
-        No transactions yet. Add one.
-      </div>
-    )
-  }
-
   return (
-    <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700">
-      <h2 className="text-white font-semibold text-base mb-5">Transactions</h2>
-      <div className="flex flex-col gap-2 max-h-80 overflow-y-auto pr-1">
-        {transactions.map((t) => (
-          <div
-            key={t.id}
-            className="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-700 hover:border-slate-500 transition-colors"
-          >
-            <div className="flex items-center gap-3">
-              <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold
-                ${t.type === 'income' ? 'bg-green-900 text-green-400' : 'bg-red-900 text-red-400'}`}>
+    <div style={{
+      backgroundColor: 'rgba(255,255,255,0.04)',
+      backdropFilter: 'blur(16px)',
+      WebkitBackdropFilter: 'blur(16px)',
+      borderRadius: '16px',
+      border: '1px solid rgba(255,255,255,0.08)',
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
+      <div style={{ padding: '20px 24px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        <h2 style={{ color: 'white', fontSize: '15px', fontWeight: '600', margin: 0 }}>Transactions</h2>
+      </div>
+      <div style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '380px', overflowY: 'auto' }}>
+        {transactions.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '40px', color: '#475569', fontSize: '13px' }}>
+            No transactions yet.
+          </div>
+        ) : transactions.map((t) => (
+          <div key={t.id} style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            padding: '10px 12px',
+            backgroundColor: 'rgba(255,255,255,0.03)',
+            borderRadius: '10px',
+            border: '1px solid rgba(255,255,255,0.05)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{
+                width: '36px', height: '36px', borderRadius: '10px',
+                backgroundColor: t.type === 'income' ? 'rgba(74,222,128,0.12)' : 'rgba(248,113,113,0.12)',
+                color: t.type === 'income' ? '#4ade80' : '#f87171',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: '16px', fontWeight: 'bold', flexShrink: 0,
+              }}>
                 {t.type === 'income' ? '↑' : '↓'}
               </div>
               <div>
-                <p className="text-sm font-medium text-white">{t.title}</p>
-                <div className="flex items-center gap-2 mt-0.5">
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${categoryColors[t.category]}`}>
+                <p style={{ color: 'white', fontSize: '13px', fontWeight: '500', margin: '0 0 4px' }}>{t.title}</p>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <span style={{
+                    fontSize: '11px', fontWeight: '500', padding: '2px 8px', borderRadius: '999px',
+                    backgroundColor: categoryColors[t.category]?.bg,
+                    color: categoryColors[t.category]?.color,
+                  }}>
                     {t.category}
                   </span>
-                  <span className="text-xs text-slate-500">{t.date}</span>
+                  <span style={{ fontSize: '11px', color: '#475569' }}>{t.date}</span>
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <span className={`text-sm font-bold ${t.type === 'income' ? 'text-green-400' : 'text-red-400'}`}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <span style={{ fontSize: '14px', fontWeight: '700', color: t.type === 'income' ? '#4ade80' : '#f87171' }}>
                 {t.type === 'income' ? '+' : '-'}{fmt(t.amount)}
               </span>
-              <button
-                onClick={() => onDelete(t.id)}
-                className="text-slate-600 hover:text-red-400 transition-colors text-base"
-              >
-                ✕
-              </button>
+              <button onClick={() => onDelete(t.id)} style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                color: '#334155', fontSize: '16px', padding: '4px', borderRadius: '6px',
+              }}>✕</button>
             </div>
           </div>
         ))}

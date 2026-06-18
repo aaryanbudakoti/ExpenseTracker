@@ -13,6 +13,66 @@ const initialTransactions = [
   { id: 6, title: 'Pharmacy', amount: 450, type: 'expense', category: 'Health', date: '2026-06-14' },
 ]
 
+const S = {
+  page: {
+    minHeight: '100vh',
+    backgroundColor: '#0d1117',
+    backgroundImage: 'radial-gradient(ellipse at 20% 20%, rgba(26,47,110,0.15) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(99,102,241,0.1) 0%, transparent 60%)',
+    color: 'white',
+    fontFamily: 'Inter, Segoe UI, sans-serif',
+  },
+  header: {
+    backgroundColor: 'rgba(13,17,23,0.8)',
+    backdropFilter: 'blur(12px)',
+    WebkitBackdropFilter: 'blur(12px)',
+    borderBottom: '1px solid rgba(255,255,255,0.06)',
+    padding: '16px 0',
+    position: 'sticky',
+    top: 0,
+    zIndex: 100,
+  },
+  headerInner: {
+    maxWidth: '1100px',
+    margin: '0 auto',
+    padding: '0 40px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  headerTitle: {
+    fontSize: '20px',
+    fontWeight: '700',
+    color: 'white',
+    margin: 0,
+  },
+  headerSub: {
+    fontSize: '13px',
+    color: '#8b9bb4',
+    marginTop: '3px',
+  },
+  headerBadge: {
+    fontSize: '12px',
+    color: '#8b9bb4',
+    backgroundColor: 'rgba(255,255,255,0.05)',
+    padding: '6px 14px',
+    borderRadius: '999px',
+    border: '1px solid rgba(255,255,255,0.08)',
+  },
+  content: {
+    maxWidth: '1100px',
+    margin: '0 auto',
+    padding: '32px 40px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '24px',
+  },
+  grid2: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '24px',
+  },
+}
+
 function App() {
   const [transactions, setTransactions] = useState(() => {
     const saved = localStorage.getItem('transactions')
@@ -32,38 +92,25 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
-
-      {/* Header */}
-      <div className="bg-slate-900 border-b border-slate-800 px-8 py-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
+    <div style={S.page}>
+      <div style={S.header}>
+        <div style={S.headerInner}>
           <div>
-            <h1 className="text-xl font-bold text-white tracking-tight">
-              💰 Expense Tracker
-            </h1>
-            <p className="text-slate-400 text-sm mt-0.5">Track your income and expenses</p>
+            <h1 style={S.headerTitle}>💰 Expense Tracker</h1>
+            <p style={S.headerSub}>Track your income and expenses</p>
           </div>
-          <div className="text-xs text-slate-500 bg-slate-800 px-3 py-1.5 rounded-full">
+          <div style={S.headerBadge}>
             {transactions.length} transactions
           </div>
         </div>
       </div>
-
-      {/* Main content */}
-      <div className="max-w-6xl mx-auto px-8 py-8">
-
-        {/* Summary Cards */}
+      <div style={S.content}>
         <SummaryCards transactions={transactions} />
-
-        {/* Form + List */}
-        <div className="grid grid-cols-2 gap-6 mt-6">
+        <div style={S.grid2}>
           <TransactionForm onAdd={handleAdd} />
           <TransactionList transactions={transactions} onDelete={handleDelete} />
         </div>
-
-        {/* Charts */}
         <Charts transactions={transactions} />
-
       </div>
     </div>
   )

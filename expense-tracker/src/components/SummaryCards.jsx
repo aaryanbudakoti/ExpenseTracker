@@ -10,22 +10,34 @@ function SummaryCards({ transactions }) {
   const balance = income - expense
   const fmt = (n) => '₹' + n.toLocaleString('en-IN')
 
+  const glass = {
+    backgroundColor: 'rgba(255,255,255,0.04)',
+    backdropFilter: 'blur(16px)',
+    WebkitBackdropFilter: 'blur(16px)',
+    borderRadius: '16px',
+    padding: '24px 28px',
+    border: '1px solid rgba(255,255,255,0.08)',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+  }
+
   return (
-    <div className="grid grid-cols-3 gap-4">
-      <div className="bg-slate-800 rounded-2xl p-5 border border-slate-700">
-        <p className="text-slate-400 text-xs font-medium uppercase tracking-widest mb-3">Total Balance</p>
-        <p className="text-3xl font-bold text-white">{fmt(balance)}</p>
-        <p className="text-slate-500 text-xs mt-2">Income − Expenses</p>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+      <div style={glass}>
+        <p style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#64748b', margin: 0 }}>Total Balance</p>
+        <p style={{ fontSize: '32px', fontWeight: '700', color: '#e2e8f0', margin: 0, lineHeight: 1.1 }}>{fmt(balance)}</p>
+        <p style={{ fontSize: '12px', color: '#475569', margin: 0 }}>Income − Expenses</p>
       </div>
-      <div className="bg-slate-800 rounded-2xl p-5 border border-green-900">
-        <p className="text-green-400 text-xs font-medium uppercase tracking-widest mb-3">Total Income</p>
-        <p className="text-3xl font-bold text-green-400">{fmt(income)}</p>
-        <p className="text-slate-500 text-xs mt-2">{transactions.filter(t => t.type === 'income').length} transactions</p>
+      <div style={{ ...glass, border: '1px solid rgba(74,222,128,0.15)', backgroundColor: 'rgba(74,222,128,0.05)' }}>
+        <p style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4ade80', margin: 0, opacity: 0.7 }}>Total Income</p>
+        <p style={{ fontSize: '32px', fontWeight: '700', color: '#4ade80', margin: 0, lineHeight: 1.1 }}>{fmt(income)}</p>
+        <p style={{ fontSize: '12px', color: '#475569', margin: 0 }}>{transactions.filter(t => t.type === 'income').length} transactions</p>
       </div>
-      <div className="bg-slate-800 rounded-2xl p-5 border border-red-900">
-        <p className="text-red-400 text-xs font-medium uppercase tracking-widest mb-3">Total Expenses</p>
-        <p className="text-3xl font-bold text-red-400">{fmt(expense)}</p>
-        <p className="text-slate-500 text-xs mt-2">{transactions.filter(t => t.type === 'expense').length} transactions</p>
+      <div style={{ ...glass, border: '1px solid rgba(248,113,113,0.15)', backgroundColor: 'rgba(248,113,113,0.05)' }}>
+        <p style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#f87171', margin: 0, opacity: 0.7 }}>Total Expenses</p>
+        <p style={{ fontSize: '32px', fontWeight: '700', color: '#f87171', margin: 0, lineHeight: 1.1 }}>{fmt(expense)}</p>
+        <p style={{ fontSize: '12px', color: '#475569', margin: 0 }}>{transactions.filter(t => t.type === 'expense').length} transactions</p>
       </div>
     </div>
   )
