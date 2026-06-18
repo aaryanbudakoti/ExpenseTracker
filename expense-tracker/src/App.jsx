@@ -97,7 +97,7 @@ function App() {
         <div style={S.headerInner}>
           <div>
             <h1 style={S.headerTitle}>💰 Spendly</h1>
-            <p style={S.headerSub}>Track your income and expenses with</p>
+            <p style={S.headerSub}>Track your income and expenses with Spendly</p>
           </div>
           <div style={S.headerBadge}>
             {transactions.length} transactions
