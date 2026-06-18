@@ -96,8 +96,8 @@ function App() {
       <div style={S.header}>
         <div style={S.headerInner}>
           <div>
-            <h1 style={S.headerTitle}>💰 Expense Tracker</h1>
-            <p style={S.headerSub}>Track your income and expenses</p>
+            <h1 style={S.headerTitle}>💰 Spendly</h1>
+            <p style={S.headerSub}>Track your income and expenses with</p>
           </div>
           <div style={S.headerBadge}>
             {transactions.length} transactions
